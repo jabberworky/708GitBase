@@ -1,0 +1,142 @@
+import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Avatar, Button, Paper, Box, Grid, Typography } from '@material-ui/core';
+import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+import { amber, grey, yellow } from '@material-ui/core/colors';
+
+import EventSeatIcon from '@material-ui/icons/EventSeat';
+import RoomIcon from '@material-ui/icons/Room';
+import BatteryStdIcon from '@material-ui/icons/BatteryStd';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        height: '100vh',
+        backgroundColor: theme.palette.grey[100],
+    },
+    image: {
+        position: 'relative',
+        backgroundImage: 'url(http://hd18116987.com/images/main/main01.png)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+    },
+    main: {
+        margin: theme.spacing(8, 4),
+        display: 'flex',
+        flexDirection: 'column',
+        //alignItems: 'center',
+    },
+    avatar: {
+        position: 'static',
+        padding: theme.spacing(3),
+
+        top: '1.3rem',
+        marginLeft: '1rem',
+
+        //backgroundColor: theme.palette.primary.dark,
+    },
+    btn: {
+        margin: theme.spacing(5),
+        padding: theme.spacing(1),
+        fontSize: '2rem',
+        backgroundColor: 'primary'
+    },
+    comp: {
+        margin: theme.spacing(2, 5),
+        padding: theme.spacing(1),
+        fontSize: '2rem',
+        textAlign: 'center',
+
+        //color: theme.palette.primary,
+        //윗줄 되는건지 의심스러움
+    },
+    list: {
+        margin: theme.spacing(2),
+        component: 'div',
+        display: 'flex',
+        flexDirection: 'column',
+    }
+}));
+
+export default function Welcome({ name, location, status, battery }) {
+    const classes = useStyles();
+    return (
+
+        <Grid container component="main" className={classes.root}>
+            <CssBaseline />
+            <Grid item xs={false} sm={4} md={7} component={Paper} elevation={6} square className={classes.image} />
+
+            <Grid item xs={12} sm={8} md={5} >
+                <Grid className={classes.main}>
+
+                    <Typography align="left" variant="h3">
+                        {'어서오세요'}
+                        <br />
+                        {name}
+                        {' 님'}
+                    </Typography>
+
+                    <Grid container
+                        direction="column"
+                        justify="center"
+                        alignItems="stretch">
+
+                        <Grid component={Paper} elevation={4} className={classes.comp}>
+
+                            <Typography margin={10} align="left" variant="h5" color="primary" gutterBottom>
+                                {"현재 위치"}
+                            </Typography>
+                            <Typography align="left" variant="body1" >
+                                {location}
+                            </Typography>
+                        </Grid>
+
+                        <Paper elevation={4} className={classes.comp}>
+                            <Avatar className={classes.avatar}>
+                                <EventSeatIcon style={{ color: grey[900] }} />
+                            </Avatar>
+                            {'상태: '}{status}
+                        </Paper>
+
+                        <Paper elevation={4} className={classes.comp}>
+                            <Avatar className={classes.avatar}>
+                                <BatteryStdIcon style={{ color: grey[900] }} />
+                            </Avatar>
+                            {'연료: '}
+                            {battery}{"%"}
+                        </Paper>
+                    </Grid>
+
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.btn}
+                    >
+                        작업시작
+                        </Button>
+
+                    <Box>
+                        <Typography variant="body2" color="textSecondary" align="center">
+                            {'POTATO Folk Lift Self Driving System'}
+                            <br />
+                            {'Copyright © POTATO'}
+                            {' '}
+                            {new Date().getFullYear()}
+                            {'.'}
+                        </Typography>
+                    </Box>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    );
+}
+
+Welcome.defaultProps = {
+    name: "지범",
+    location: '창고',
+    status: '작업중',
+    battery: '68',
+}
